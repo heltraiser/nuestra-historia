@@ -1,229 +1,240 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestra Historia ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-<style>
-/* Reset y body */
-body {
-  margin: 0;
-  background: #0b0b12;
-  color: white;
-  font-family: 'Playfair Display', serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff758c;
+            --secondary: #ff7eb3;
+            --glass: rgba(255, 255, 255, 0.2);
+            --text: #2d3436;
+        }
 
-/* Slides */
-.screen {
-  display: none;
-  padding: 40px;
-  max-width: 420px;
-  animation: fade 1.2s ease forwards;
-}
-.active { display: block; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-h1 { font-weight: 400; font-size: 1.8em; }
-.big { font-size: 2.8em; margin: 20px 0; }
-.soft { opacity: 0.7; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fb929e 0%, #ffc4d0 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 200vh; /* Para permitir el scroll */
+        }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        /* --- Fondo de Corazones/Pétalos --- */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-/* Corazones */
-.heart {
-  position: absolute;
-  color: #ff4d6d;
-  font-size: 18px;
-  animation: float 6s linear infinite;
-}
+        /* --- Música --- */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .music-player:active { transform: scale(0.95); }
 
-@keyframes float {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-10vh); opacity: 0; }
-}
+        /* --- Contenedor Principal --- */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            text-align: center;
+        }
 
-/* Fotos y nombres finales */
-.photo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('foto.jpg') center/cover no-repeat;
-  opacity: 0;
-  transition: opacity 2s ease;
-}
+        /* --- Tarjeta Romántica --- */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 40px 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
 
-.photo.visible { opacity: 1; }
+        .card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-.name {
-  position: fixed;
-  top: 40%;
-  width: 100%;
-  text-align: center;
-  font-size: 3em;
-  letter-spacing: 4px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 2s ease;
-  text-shadow: 0 0 20px rgba(0,0,0,0.9);
-  font-family: 'Pacifico', cursive;
-}
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #d63031;
+            margin-bottom: 15px;
+        }
 
-.name.visible {
-  opacity: 1;
-  transform: scale(1);
-}
+        p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
 
-.overlay-text {
-  position: fixed;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  max-width: 85%;
-  font-size: 1.4em;
-  text-shadow: 0 0 15px rgba(0,0,0,0.8);
-  opacity: 0;
-  transition: opacity 2s ease;
-}
+        .quote {
+            font-style: italic;
+            color: #636e72;
+            border-left: 3px solid var(--primary);
+            padding-left: 15px;
+            margin: 20px 0;
+        }
 
-.overlay-text.visible { opacity: 1; }
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
-/* Spotify Embed estilo tarjeta */
-.spotify {
-  position: fixed;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 12px;
-  overflow: hidden;
-  width: 300px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.8rem; }
+            .container { padding: 60px 15px; }
+        }
 
-/* Responsive */
-@media(max-width: 500px){
-  h1 { font-size: 1.6em; }
-  .big { font-size: 2.2em; }
-  .overlay-text { font-size: 1.2em; }
-  .spotify { width: 90%; }
-}
-</style>
+        /* --- Animación de corazones --- */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
+<body>
 
-<body onclick="nextScreen()">
+    <div id="particles-container"></div>
 
-<!-- Slides -->
-<div id="s0" class="screen active">
-  <h1>Hay momentos que empiezan<br>sin que lo sepas…</h1>
-  <p class="soft">(Toca la pantalla)</p>
-</div>
+    <div class="music-player" onclick="togglePlay()">
+        <span id="music-icon">🎵</span>
+        <small>One More Light</small>
+        <div id="player"></div>
+    </div>
 
-<div id="s1" class="screen">
-  <h1>Llevamos</h1>
-  <div class="big" id="days">0</div>
-  <p class="soft">días hablando</p>
-</div>
+    <div class="container">
+        <div class="card fade-in">
+            <h1>Nuestra Historia</h1>
+            <p>Hay momentos que se quedan grabados para siempre. Esta página es un pequeño rincón para recordar lo especial que eres para mí.</p>
+            <div class="quote">
+                "Who cares if one more light goes out? <br>
+                Well, I do." — Linkin Park
+            </div>
+        </div>
 
-<div id="s2" class="screen">
-  <div class="big">55.188</div>
-  <h1>mensajes</h1>
-  <p class="soft">Nunca me cansé de escribirte</p>
-</div>
+        <div class="card fade-in">
+            <h2>Un momento especial</h2>
+            <img src="https://via.placeholder.com/400x300?text=Tu+Foto+Aquí" alt="Recuerdo">
+            <p>Gracias por ser esa luz que brilla incluso en los días más oscuros. Cada paso que damos juntos es mi parte favorita de la historia.</p>
+        </div>
 
-<div id="s3" class="screen">
-  <div class="big">😘 12.147</div>
-  <h1>besos enviados</h1>
-</div>
+        <div class="card fade-in">
+            <h2>Para Siempre</h2>
+            <p>Eres mi "One More Light". Gracias por estar aquí.</p>
+            <h1 style="font-size: 2rem;">Te quiero ❤️</h1>
+        </div>
+    </div>
 
-<!-- Elementos finales -->
-<div class="photo" id="photo"></div>
-<div class="name" id="nameText">Patri</div>
-<div class="overlay-text" id="finalText">
-  Porque lo que siento no cabe en estadísticas.<br><br>
-  Te elegiría en cada vida.<br><br>
-  <strong>Feliz San Valentín ❤️</strong>
-</div>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
-<!-- Spotify Embed -->
-<div class="spotify">
-  <iframe src="https://open.spotify.com/embed/track/3n3Ppam7vgaVa1iaRUc9Lp" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-</div>
+    <script>
+        // --- 1. Lógica de Música ---
+        let player;
+        let isPlaying = false;
 
-<!-- Música de fondo -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'Tm8LGxTLtQk', // ID de One More Light
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
 
-<script>
-let current = 0;
-const total = 4;
+        function onPlayerReady(event) {
+            // El video está listo pero no puede auto-reproducirse por políticas del navegador
+        }
 
-function nextScreen() {
-  if (current < total - 1) {
-    document.getElementById("s" + current).classList.remove("active");
-    current++;
-    document.getElementById("s" + current).classList.add("active");
+        function togglePlay() {
+            if (!isPlaying) {
+                player.playVideo();
+                document.getElementById('music-icon').innerText = '⏸️';
+                isPlaying = true;
+            } else {
+                player.pauseVideo();
+                document.getElementById('music-icon').innerText = '🎵';
+                isPlaying = false;
+            }
+        }
 
-    if (current === 1) animateDays();
-    if (current === 3) hearts();
-  } else if (current === total - 1) {
-    document.getElementById("s" + current).classList.remove("active");
-    showFinal();
-  }
-}
+        // --- 2. Animación de Scroll (Intersection Observer) ---
+        const observerOptions = {
+            threshold: 0.2
+        };
 
-function animateDays() {
-  const start = new Date("2023-06-18");
-  const today = new Date();
-  const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-  let count = 0;
-  const el = document.getElementById("days");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-  const interval = setInterval(() => {
-    count++;
-    el.textContent = count;
-    if (count >= diff) clearInterval(interval);
-  }, 15);
-}
+        document.querySelectorAll('.fade-in').forEach(card => {
+            observer.observe(card);
+        });
 
-function hearts() {
-  for (let i = 0; i < 35; i++) {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.textContent = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(heart);
-  }
-}
+        // --- 3. Corazones Cayendo ---
+        function createHeart() {
+            const container = document.getElementById('particles-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
 
-function showFinal() {
-  const photo = document.getElementById("photo");
-  const name = document.getElementById("nameText");
-  const text = document.getElementById("finalText");
-
-  photo.classList.add("visible");
-
-  if (navigator.vibrate) {
-    navigator.vibrate([100, 50, 100]);
-  }
-
-  setTimeout(() => { name.classList.add("visible"); }, 1200);
-  setTimeout(() => { text.classList.add("visible"); }, 3000);
-}
-</script>
-
+        setInterval(createHeart, 300);
+    </script>
 </body>
 </html>
