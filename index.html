@@ -17,7 +17,6 @@ body {
   height: 100vh;
   text-align: center;
   overflow: hidden;
-  transition: background 1.5s ease;
 }
 .screen {
   display: none;
@@ -61,6 +60,24 @@ h1 { font-weight: 400; font-size: 1.8em; }
 
 .photo.visible {
   opacity: 1;
+}
+
+.name {
+  position: fixed;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 3em;
+  letter-spacing: 4px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 2s ease;
+  text-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
+.name.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .overlay-text {
@@ -108,6 +125,8 @@ h1 { font-weight: 400; font-size: 1.8em; }
 
 <div class="photo" id="photo"></div>
 
+<div class="name" id="nameText">Patri</div>
+
 <div class="overlay-text" id="finalText">
   Porque lo que siento no cabe en estadísticas.<br><br>
   Te elegiría en cada vida.<br><br>
@@ -128,7 +147,7 @@ function nextScreen() {
     if (current === 3) hearts();
   } else if (current === total - 1) {
     document.getElementById("s" + current).classList.remove("active");
-    showPhoto();
+    showFinal();
   }
 }
 
@@ -157,11 +176,25 @@ function hearts() {
   }
 }
 
-function showPhoto() {
-  document.getElementById("photo").classList.add("visible");
+function showFinal() {
+  const photo = document.getElementById("photo");
+  const name = document.getElementById("nameText");
+  const text = document.getElementById("finalText");
+
+  photo.classList.add("visible");
+
+  // Vibración sutil si el dispositivo lo permite
+  if (navigator.vibrate) {
+    navigator.vibrate([100, 50, 100]);
+  }
+
   setTimeout(() => {
-    document.getElementById("finalText").classList.add("visible");
-  }, 1500);
+    name.classList.add("visible");
+  }, 1200);
+
+  setTimeout(() => {
+    text.classList.add("visible");
+  }, 3000);
 }
 </script>
 
