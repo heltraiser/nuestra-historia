@@ -8,7 +8,6 @@
     <style>
         :root {
             --accent: #ff4d6d;
-            --deep-blue: #0f1c2e; /* Color Linkin Park / Noche */
             --glass: rgba(255, 255, 255, 0.1);
         }
 
@@ -39,200 +38,233 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
             overflow: hidden;
             transition: background 1s ease;
         }
 
-        /* --- FONDOS DINÁMICOS --- */
-        /* FASE 1: DATOS (Rojos y Intensos) */
-        .slide-intro { background: linear-gradient(180deg, #1a050b, #4a0e1c); }
-        .slide-stats { background: linear-gradient(180deg, #4a0e1c, #800f2f); }
-        .slide-record { background: linear-gradient(180deg, #800f2f, #5e1124); }
-        .slide-fun { background: linear-gradient(180deg, #5e1124, #2d0014); }
+        /* --- FONDOS DEGRADADOS (Más variados) --- */
+        .bg-1 { background: linear-gradient(180deg, #1a050b, #5c0a1e); } /* Intro */
+        .bg-2 { background: linear-gradient(180deg, #5c0a1e, #8f122e); } /* Stats */
+        .bg-3 { background: linear-gradient(180deg, #8f122e, #b31636); } /* Words */
+        .bg-4 { background: linear-gradient(180deg, #b31636, #d91c42); } /* Years */
+        .bg-5 { background: linear-gradient(180deg, #d91c42, #7a0e24); } /* Quotes */
+        .bg-6 { background: linear-gradient(180deg, #7a0e24, #4a0513); } /* Night */
+        .bg-7 { background: linear-gradient(180deg, #4a0513, #2e020a); } /* Battle */
         
-        /* FASE 2: EMOCIÓN (Azul Noche / One More Light) */
-        .slide-transition { background: linear-gradient(180deg, #2d0014, #0f1c2e); }
-        .slide-song { background: linear-gradient(180deg, #0f1c2e, #1e3c5e); }
-        .slide-promise { background: linear-gradient(180deg, #1e3c5e, #0f1c2e); }
-        .slide-final { background: #000; }
+        /* TRANSICIÓN A LINKIN PARK (Azules/Noche) */
+        .bg-lp-1 { background: linear-gradient(180deg, #2e020a, #0f172a); }
+        .bg-lp-2 { background: linear-gradient(180deg, #0f172a, #1e293b); }
+        .bg-lp-3 { background: linear-gradient(180deg, #1e293b, #0f172a); }
+        .bg-final { background: #000; }
 
-        /* --- TEXTOS Y ELEMENTOS --- */
-        h1 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; line-height: 1.1; }
+        /* --- TEXTOS --- */
+        h1 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; line-height: 1.1; letter-spacing: -1px; }
         h2 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--accent); margin: 10px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        p { font-size: 1.1rem; opacity: 0.9; margin: 8px 0; line-height: 1.5; font-weight: 300; }
+        p { font-size: 1.1rem; opacity: 0.9; margin: 8px 0; line-height: 1.6; font-weight: 300; }
         
         .big-number { 
-            font-size: 3.5rem; font-weight: 900; display: block; 
-            background: -webkit-linear-gradient(#fff, #ffccd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin: 5px 0; filter: drop-shadow(0 4px 5px rgba(255, 77, 109, 0.3));
+            font-size: 4rem; font-weight: 900; display: block; 
+            margin: 10px 0; color: #fff;
+            text-shadow: 0 4px 20px rgba(255, 77, 109, 0.5);
         }
 
-        /* Cajas de Datos */
-        .stat-grid { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; max-width: 400px; }
-        .stat-card { background: var(--glass); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        /* --- ELEMENTOS VISUALES --- */
+        .stat-card { background: var(--glass); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); width: 90%; max-width: 400px; margin: 10px 0; }
+        
+        /* Nube de Palabras */
+        .word-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 90%; margin: 20px 0; }
+        .tag { padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; background: rgba(255,255,255,0.2); animation: float 4s infinite ease-in-out; }
+        .tag:nth-child(odd) { background: var(--accent); color: white; animation-duration: 5s; }
 
-        /* Gráfico de Barras */
-        .bar-wrap { width: 100%; max-width: 350px; margin: 10px 0; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
-        .progress { height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
+        /* Línea de Tiempo / Años */
+        .timeline-item { display: flex; justify-content: space-between; width: 100%; max-width: 300px; border-bottom: 1px solid rgba(255,255,255,0.3); padding: 10px 0; margin: 5px 0; }
+        .year { font-weight: 900; font-size: 1.5rem; }
+
+        /* Barras de Progreso */
+        .bar-wrap { width: 100%; max-width: 350px; margin: 15px 0; }
+        .progress { height: 10px; background: rgba(255,255,255,0.2); border-radius: 5px; overflow: hidden; margin-top: 5px; }
         .fill { height: 100%; width: 0; transition: width 2s ease-out; }
 
         /* Foto Final */
-        .final-img {
-            width: 80vw; max-width: 320px; aspect-ratio: 1/1;
-            object-fit: cover; border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 77, 109, 0.3);
-            border: 3px solid rgba(255,255,255,0.8);
-            margin-bottom: 20px;
-        }
+        .final-img { width: 80vw; max-width: 320px; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 77, 109, 0.3); border: 4px solid white; margin-bottom: 20px; }
 
         /* Animaciones */
-        .content { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .content { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
         section.active .content { opacity: 1; transform: translateY(0); }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* Estrellas para la sección Linkin Park */
-        .stars { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 2s; }
-        .slide-song.active .stars, .slide-promise.active .stars { opacity: 1; }
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 3s infinite; }
-
+        /* Estrellas */
+        .stars { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; opacity: 0; transition: opacity 2s; }
+        .slide-stars.active .stars { opacity: 1; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.2; } }
 
         /* Botón Música */
-        .music-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 100;
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3); color: white;
-            padding: 10px 18px; border-radius: 30px; font-weight: 700; font-size: 12px;
-            display: flex; align-items: center; gap: 8px; cursor: pointer;
-        }
+        .music-btn { position: fixed; top: 20px; right: 20px; z-index: 100; background: rgba(255, 77, 109, 0.9); border: none; color: white; padding: 10px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
 
-    <button class="music-btn" onclick="togglePlay()">
-        <span>🎵</span> <span id="btn-text">PLAY MUSIC</span>
-    </button>
+    <button class="music-btn" onclick="togglePlay()">🎵 PLAY MÚSICA</button>
     <div id="player"></div>
 
     <div class="scroll-container">
         
-        <section class="slide-intro active">
+        <section class="bg-1 active">
             <div class="content">
-                <p>Nuestra Historia</p>
-                <h1>Todo empezó el<br>18 Jun 2023</h1>
-                <p>Y desde entonces...</p>
-                <h2>No hemos parado.</h2>
-                <div style="margin-top: 40px; font-size: 2rem; animation: bounce 2s infinite;">👇</div>
+                <p>Tu Resumen 2023 - 2026</p>
+                <h1>Nuestra<br>Historia</h1>
+                <p>Todo empezó el 18 de Junio de 2023.</p>
+                <div style="margin-top: 40px; font-size: 2rem; animation: float 2s infinite;">👇</div>
             </div>
         </section>
 
-        <section class="slide-stats">
+        <section class="bg-2">
             <div class="content">
                 <h1>Magnitud</h1>
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <span class="big-number counter" data-target="55188">0</span>
-                        <p>Mensajes totales</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="big-number counter" data-target="568830">0</span>
-                        <p>Palabras escritas</p>
-                    </div>
+                <div class="stat-card">
+                    <span class="big-number counter" data-target="55188">0</span>
+                    <p>Mensajes totales</p>
                 </div>
-                <p style="margin-top: 20px;">Y ni una sola fue casualidad.</p>
+                <div class="stat-card">
+                    <span class="big-number counter" data-target="568830">0</span>
+                    <p>Palabras escritas</p>
+                </div>
+                <p style="font-size: 0.9rem; margin-top: 20px;">Cada palabra ha merecido la pena.</p>
             </div>
         </section>
 
-        <section class="slide-record">
+        <section class="bg-3">
             <div class="content">
-                <p>2023 no fue un año, fue una revolución.</p>
-                <div class="stat-card" style="margin: 20px 0;">
-                    <h1>9 de Julio</h1>
-                    <span class="big-number counter" data-target="1931">0</span>
-                    <p>Mensajes en un solo día</p>
+                <h1>Nuestro Mundo</h1>
+                <p>Palabras que definen nuestra historia:</p>
+                <div class="word-cloud">
+                    <span class="tag">Gijón 🌊</span>
+                    <span class="tag">Montaña ⛰️</span>
+                    <span class="tag">Risas 😂</span>
+                    <span class="tag">Vinito 🍷</span>
+                    <span class="tag">Patri ❤️</span>
+                    <span class="tag">Solete ☀️</span>
                 </div>
-                <div style="border-left: 3px solid var(--accent); padding-left: 15px; text-align: left; margin-top: 20px;">
-                    <p style="font-style: italic;">"Eso no fue hablar.<br>Fue sentir sin pausa."</p>
+                <p style="margin-top: 20px;">Y miles de "Jajajaja"</p>
+            </div>
+        </section>
+
+        <section class="bg-4">
+            <div class="content">
+                <h1>La Evolución</h1>
+                <p>Cómo hemos crecido:</p>
+                
+                <div class="stat-card" style="text-align: left;">
+                    <div class="timeline-item">
+                        <span class="year">2023</span>
+                        <span>La Revolución 💥</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">2024</span>
+                        <span>La Consolidación 🏠</span>
+                    </div>
+                    <div class="timeline-item" style="border: none;">
+                        <span class="year">2025</span>
+                        <span>El Futuro 🚀</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h2>9 de Julio 2023</h2>
+                    <p>Día récord: <strong>1.931 mensajes</strong></p>
                 </div>
             </div>
         </section>
 
-        <section class="slide-fun">
+        <section class="bg-5">
+            <div class="content">
+                <h1>El Origen</h1>
+                <p>Nunca olvidaré cómo empezó todo:</p>
+                <div style="font-style: italic; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    "Soy Juanjo... por lo visto somos gente de bien y majos que deberíamos conocernos."
+                </div>
+                <p>Úrsula tenía toda la razón.</p>
+            </div>
+        </section>
+
+        <section class="bg-6">
             <div class="content">
                 <h1>23:00 h</h1>
                 <p>Nuestra hora mágica.</p>
-                <p>7.507 mensajes mientras el mundo dormía.</p>
-                
-                <div style="margin-top: 40px;">
-                    <p>Constancia:</p>
-                    <span class="big-number counter" data-target="57">0</span>
-                    <p>Mensajes al día (Media)</p>
-                    <p style="font-size: 0.9rem; opacity: 0.7;">Todos los días. Incluso los difíciles.</p>
-                </div>
+                <div style="font-size: 5rem;">🌙</div>
+                <p><strong>7.507 mensajes</strong></p>
+                <p>cuando el mundo dormía.</p>
             </div>
         </section>
 
-        <section class="slide-fun">
+        <section class="bg-7">
             <div class="content">
-                <h1>El Marcador</h1>
+                <h1>Patri vs JJ</h1>
                 
                 <div class="bar-wrap">
-                    <div class="bar-label"><span>Patri ❤️</span> <span>29.556</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Patri ❤️</span> <span>29.556</span></div>
                     <div class="progress"><div class="fill" style="width: 53%; background: #ff4d6d;"></div></div>
                 </div>
                 
                 <div class="bar-wrap">
-                    <div class="bar-label"><span>JJ</span> <span>25.631</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>JJ</span> <span>25.631</span></div>
                     <div class="progress"><div class="fill" style="width: 47%; background: #fff;"></div></div>
                 </div>
 
-                <div class="stat-card" style="margin-top: 30px;">
-                    <div style="font-size: 4rem;">😘</div>
-                    <p>Enviado <span class="counter" data-target="12147">0</span> veces.</p>
-                    <p style="font-weight: bold; color: var(--accent);">Nuestro idioma.</p>
+                <div style="margin-top: 40px;">
+                    <p>Emoji Oficial:</p>
+                    <span style="font-size: 3rem;">😘</span>
+                    <p>(12.147 veces)</p>
                 </div>
             </div>
         </section>
 
-        <section class="slide-transition">
+        <section class="bg-lp-1 slide-stars">
             <div class="stars"></div>
             <div class="content">
-                <p>Pero entre tantos números...</p>
-                <h1 style="margin-top: 20px;">Hay una verdad<br>más importante.</h1>
+                <p>Pero entre tantos datos y fechas...</p>
+                <h1 style="margin-top: 20px;">Hay algo que<br>nunca cambia.</h1>
             </div>
         </section>
 
-        <section class="slide-song">
+        <section class="bg-lp-2 slide-stars">
             <div class="stars"></div>
             <div class="content">
-                <p style="font-family: 'Great Vibes'; font-size: 2rem; color: #a2d2ff;">"In the sky of a million stars..."</p>
-                <div style="margin: 30px 0;">
-                    <h1 style="font-size: 2.5rem; text-transform: none;">Who cares if one more light goes out?</h1>
-                </div>
-                <p style="opacity: 0.7;">Linkin Park</p>
+                <p style="font-family: 'Great Vibes'; font-size: 2.2rem; color: #a2d2ff;">"In the sky of a million stars..."</p>
+                <div style="margin-top: 50px;"></div>
+                <p style="font-family: 'Great Vibes'; font-size: 2.2rem; color: #a2d2ff;">"It flickers, flickers..."</p>
             </div>
         </section>
 
-        <section class="slide-promise">
+        <section class="bg-lp-3 slide-stars">
             <div class="stars"></div>
             <div class="content">
-                <h1 style="font-size: 3rem; color: var(--accent);">Well, I do.</h1>
-                <p style="max-width: 400px; margin-top: 20px;">
+                <h1 style="font-size: 2.5rem; text-transform: none; line-height: 1.4;">Who cares if one more light goes out?</h1>
+                <p style="opacity: 0.6; margin-top: 20px;">Linkin Park</p>
+            </div>
+        </section>
+
+        <section class="bg-lp-3 slide-stars">
+            <div class="stars"></div>
+            <div class="content">
+                <h1 style="font-size: 3.5rem; color: var(--accent);">Well, I do.</h1>
+                <p style="max-width: 450px; margin-top: 30px; font-size: 1.2rem;">
                     Me da igual lo que digan los números. Lo único que me importa es cuidar de tu luz.
                 </p>
-                <p style="font-weight: bold; margin-top: 10px;">Siempre.</p>
+                <p style="font-weight: bold; margin-top: 15px;">Siempre.</p>
             </div>
         </section>
 
-        <section class="slide-final">
+        <section class="bg-final">
             <div class="content">
                 <img src="foto.jpg" alt="Nosotros" class="final-img">
-                <p>"Si cada mensaje fuera un latido, esto sería un corazón imposible de parar."</p>
-                
-                <h2 style="margin-top: 20px;">Te quiero ❤️</h2>
-                <h1 style="font-size: 1.5rem; margin-top: 10px;">Seguiría eligiéndote.</h1>
+                <p style="font-style: italic;">"Si cada mensaje fuera un latido, esto sería un corazón imposible de parar."</p>
+                <h2 style="margin-top: 30px;">Te Quiero ❤️</h2>
+                <h1 style="font-size: 1.5rem;">Seguiría eligiéndote.</h1>
             </div>
         </section>
 
@@ -240,25 +272,25 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // --- 1. FONDO DE ESTRELLAS (Para la parte romántica) ---
+        // 1. ESTRELLAS
         function createStars() {
-            const starContainers = document.querySelectorAll('.stars');
-            starContainers.forEach(container => {
-                for(let i=0; i<50; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-                    star.style.width = Math.random() * 3 + 'px';
-                    star.style.height = star.style.width;
-                    star.style.left = Math.random() * 100 + '%';
-                    star.style.top = Math.random() * 100 + '%';
-                    star.style.animationDelay = Math.random() * 2 + 's';
-                    container.appendChild(star);
+            const containers = document.querySelectorAll('.stars');
+            containers.forEach(cont => {
+                for(let i=0; i<60; i++) {
+                    const s = document.createElement('div');
+                    s.className = 'star';
+                    s.style.left = Math.random()*100 + '%';
+                    s.style.top = Math.random()*100 + '%';
+                    s.style.width = Math.random()*3 + 'px';
+                    s.style.height = s.style.width;
+                    s.style.animationDelay = Math.random()*2 + 's';
+                    cont.appendChild(s);
                 }
             });
         }
         createStars();
 
-        // --- 2. LOGICA MUSICA ---
+        // 2. MÚSICA
         let player;
         let isPlaying = false;
         function onYouTubeIframeAPIReady() {
@@ -268,40 +300,34 @@
             });
         }
         function togglePlay() {
-            const btnText = document.getElementById('btn-text');
-            if (!isPlaying) { 
-                player.playVideo(); 
-                isPlaying = true; 
-                btnText.innerText = 'PAUSAR';
-            } else { 
-                player.pauseVideo(); 
-                isPlaying = false; 
-                btnText.innerText = 'PLAY MUSIC'; 
+            const btn = document.querySelector('.music-btn');
+            if(!isPlaying) {
+                player.playVideo(); isPlaying = true; btn.innerText = "⏸ PAUSAR";
+            } else {
+                player.pauseVideo(); isPlaying = false; btn.innerText = "🎵 PLAY MÚSICA";
             }
         }
 
-        // --- 3. ANIMACIONES Y SCROLL ---
+        // 3. ANIMACIONES
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if(entry.isIntersecting) {
                     entry.target.classList.add('active');
                     
-                    // Animar números
-                    const counters = entry.target.querySelectorAll('.counter');
-                    counters.forEach(counter => {
-                        const target = +counter.getAttribute('data-target');
-                        animateValue(counter, 0, target, 2500);
-                        counter.classList.remove('counter'); 
+                    // Contadores
+                    entry.target.querySelectorAll('.counter').forEach(c => {
+                        const target = +c.getAttribute('data-target');
+                        animateValue(c, 0, target, 2000);
+                        c.classList.remove('counter');
                     });
 
-                    // Animar Barras
-                    const bars = entry.target.querySelectorAll('.fill');
-                    bars.forEach(bar => { bar.style.width = bar.style.width; });
+                    // Barras
+                    entry.target.querySelectorAll('.fill').forEach(f => f.style.width = f.style.width);
                 } else {
                     entry.target.classList.remove('active');
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.3 });
 
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
@@ -310,17 +336,11 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // Usar Math.floor para enteros y toLocaleString para puntos (55.188)
                 obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString('es-ES');
                 if (progress < 1) window.requestAnimationFrame(step);
             };
             window.requestAnimationFrame(step);
         }
-
-        // --- 4. CSS PARA ANIMACION DE FLECHA ---
-        const style = document.createElement('style');
-        style.innerHTML = `@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }`;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
